@@ -1,4 +1,4 @@
-package com.cutm.main.model;
+package com.cutm.main.modal;
 
 
 public class Size {

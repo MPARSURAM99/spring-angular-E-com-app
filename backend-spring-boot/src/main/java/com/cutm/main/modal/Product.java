@@ -1,4 +1,4 @@
-package com.cutm.main.model;
+package com.cutm.main.modal;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.cutm.main.model;
+package com.cutm.main.modal;
 
 import java.util.ArrayList;
 import java.util.HashSet;
