@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
-import { BASE_API_URL } from 'src/app/config/api';
+
 import {
   createProductFailure,
   createProductSuccess,
@@ -16,18 +16,18 @@ import {
   updateProductFailure,
   updateProductSuccess,
 } from './Actions';
-import { ProductRequest } from 'src/app/Models/Product';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BASE_API_URL } from '../../config/api';
+import { ProductRequest } from '../../Models/Product';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
   API_BASE_URL = BASE_API_URL;
   private getHeaders(): HttpHeaders {
-    const token = localStorage.getItem('jwt'); // Get JWT token from localStorage
+    const token = localStorage.getItem('jwt'); 
 
-    // Set headers with the JWT token
     return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
 
@@ -111,12 +111,10 @@ export class ProductService {
       .pipe(
         map((data: any) => {
           console.log(' created product ', data);
-          // this.router.navigate([
-          //   `/${product.topLavelCategory}/${product.secondLavelCategory}/${product.thirdLavelCategory}`,
-          // ]);
           return createProductSuccess(data);
         }),
         catchError((error: any) => {
+          console.log(" error creating product",error)
           return of(
             createProductFailure(
               error.response && error.response.data.message
@@ -158,9 +156,10 @@ export class ProductService {
     return this.http
       .get(`${this.API_BASE_URL}/api/admin/products/recent`, { headers })
       .pipe(
-        map((data: any) =>{
-          console.log("recent product ",data)
-          return recentllyAddedProductsSuccess({payload:data})}),
+        map((data: any) => {
+          console.log('recent product ', data);
+          return recentllyAddedProductsSuccess({ payload: data });
+        }),
         catchError((error: any) => {
           return of(
             recentllyAddedProductsFailure(
@@ -173,13 +172,5 @@ export class ProductService {
       )
       .subscribe((action) => this.store.dispatch(action));
   }
-
 }
-function catchErro(arg0: () => void): import('rxjs').OperatorFunction<
-  {
-    payload: any;
-  } & import('@ngrx/store/src/models').TypedAction<'[Product] Find Products By Category Success'>,
-  any
-> {
-  throw new Error('Function not implemented.');
-}
+      

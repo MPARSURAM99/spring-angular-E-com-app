@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from 'src/app/Models/user.model';
+import { User } from '../../Models/user.model';
+
 
 export const getUserProfile = createAction('[User] Get User Profile');
 export const getUserProfileSuccess = createAction(

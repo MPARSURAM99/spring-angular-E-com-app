@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { getAllCustomersSuccess, getUserProfile, getUserProfileFailure, getUserProfileSuccess, logoutSuccess } from './Actions';
-import { User } from 'src/app/Models/user.model';
+// import { User } from 'src/app/Models/user.model';
 
 export interface UserState {
   userProfile: any;

@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { User } from 'src/app/Models/user.model';
-import { BASE_API_URL } from 'src/app/config/api';
+
 import {
   loginFailure,
   loginSuccess,
@@ -11,6 +10,9 @@ import {
   registerSuccess,
 } from './auth.actions';
 import { Store } from '@ngrx/store';
+import { BASE_API_URL } from '../../config/api';
+import { User } from '../../Models/user.model';
+import { UserService } from '../User/user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,16 +20,21 @@ import { Store } from '@ngrx/store';
 export class AuthService {
   private apiUrl = BASE_API_URL + '/auth';
 
-  constructor(private http: HttpClient, private store: Store) {}
+  constructor(
+    private http: HttpClient,
+    private store: Store,
+    private userService: UserService
+  ) {}
 
   login(loginData: any) {
     return this.http
       .post<User>(`${this.apiUrl}/signin`, loginData)
       .pipe(
         map((user: any) => {
-          console.log("login user ",user)
-          if(user.jwt){
-            localStorage.setItem("jwt",user.jwt)
+          console.log('login user ', user);
+          if (user.jwt) {
+            localStorage.setItem('jwt', user.jwt);
+            this.userService.getUserProfile();
           }
           return loginSuccess({ user });
         }),
@@ -55,9 +62,10 @@ export class AuthService {
     return this.http
       .post(`${this.apiUrl}/signup`, registerData)
       .pipe(
-        map((data:any) => {
-          if(data.jwt){
-            localStorage.setItem("jwt",data.jwt)
+        map((data: any) => {
+          if (data.jwt) {
+            localStorage.setItem('jwt', data.jwt);
+            this.userService.getUserProfile();
           }
           return registerSuccess({ user: data });
         }),

@@ -11,7 +11,7 @@ import {
   updatePaymentRequest,
   updatePaymentSuccess,
 } from './Actions';
-import { BASE_API_URL } from 'src/app/config/api';
+import { BASE_API_URL } from '../../config/api';
 
 @Injectable({
   providedIn: 'root',
@@ -36,12 +36,14 @@ export class PaymentService {
       .post(url, {}, { headers })
       .pipe(
         map((response: any) => {
+          console.log(response)
           if (response.payment_link_url) {
             window.location.href = response.payment_link_url;
           }
           return createPaymentSuccess({ payload: response });
         }),
         catchError((error) => {
+          console.log("error",error)
           return of(
             createPaymentFailure(
               error.response && error.response.data.message

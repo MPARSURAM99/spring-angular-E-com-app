@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
-import { BASE_API_URL } from 'src/app/config/api';
 import { addItemToCartFailure, addItemToCartSuccess, getCartFailure, getCartSuccess, removeCartItemFailure, removeCartItemSuccess, updateCartItemFailure, updateCartItemSuccess } from './cart.actions';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BASE_API_URL } from '../../config/api';
 
 @Injectable({
   providedIn: 'root',

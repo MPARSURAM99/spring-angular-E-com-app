@@ -7,7 +7,8 @@ import {
   registerSuccess,
   registerFailure
 } from './auth.actions';
-import { User } from 'src/app/Models/user.model';
+import { User } from '../../Models/user.model';
+// import { User } from 'src/app/Models/user.model';
 
 export interface AuthState {
   user: User | null;

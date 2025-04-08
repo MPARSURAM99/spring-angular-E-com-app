@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
-import { User } from 'src/app/Models/user.model';
-import { BASE_API_URL } from 'src/app/config/api';
+
 import { getAllCustomersFailure, getAllCustomersSuccess, getUserProfileFailure, getUserProfileSuccess, logoutSuccess } from './Actions';
 import { Store } from '@ngrx/store';
+import { BASE_API_URL } from '../../config/api';
+import { User } from '../../Models/user.model';
 
 @Injectable({
   providedIn: 'root'

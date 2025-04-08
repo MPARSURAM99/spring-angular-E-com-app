@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, catchError, map, of } from 'rxjs';
-import { BASE_API_URL } from 'src/app/config/api';
 import {
   confirmedOrderFailure,
   confirmedOrderSuccess,
@@ -22,6 +21,7 @@ import {
   shipOrderFailure,
   shipOrderSuccess,
 } from './Actions';
+import { BASE_API_URL } from '../../config/api';
 
 @Injectable({
   providedIn: 'root',
